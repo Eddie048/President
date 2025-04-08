@@ -55,7 +55,7 @@ public class Deck {
         for(int i = 0; i < cards.size(); i++) {
 
             // Choose location to swap
-            int rPosition = (int)(Math.random()* cards.size());
+            int rPosition = (int) (Math.random() * cards.size());
 
             // Swap cards
             Card temp = cards.get(i);
