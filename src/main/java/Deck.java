@@ -38,6 +38,11 @@ public class Deck {
     }
 
 
+    public int size() {
+        return cards.size();
+    }
+
+
     /**
      * Return an array of cards to the deck
      * @param returned the cards to be returned
