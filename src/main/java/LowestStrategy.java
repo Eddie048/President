@@ -6,7 +6,7 @@ public class LowestStrategy implements Strategy{
         Card lowest = null;
 
         for (Card c : hand) {
-            if (c.value() >= current.value() && (lowest == null || c.value() < lowest.value())) {
+            if ((current == null || c.value() >= current.value()) && (lowest == null || c.value() < lowest.value())) {
                 lowest = c;
             }
         }
