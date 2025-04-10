@@ -4,6 +4,8 @@ import java.util.List;
 public class RandomStrategy implements Strategy{
     @Override
     public Card play(List<Card> hand, Card current) {
+        if (hand.size() == 0) return null;
+
         // If current card is null, pick card at random
         if (current == null) return hand.get((int) (Math.random() * hand.size()));
 

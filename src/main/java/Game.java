@@ -10,7 +10,7 @@ public class Game {
         this.players = players;
         deck = new Deck();
         deck.shuffle();
-        currentTurn = 0;
+        currentTurn = (int) (Math.random() * players.size());
     }
 
     /**
@@ -42,6 +42,10 @@ public class Game {
             }
             if (gameOver) break;
 
+//            for (Player p : players) {
+//                if (p.hasWon()) return p;
+//            }
+
         }
         return null;
     }
@@ -56,10 +60,12 @@ public class Game {
 
         while (true) {
             // One player's turn
-            // System.out.println("It is now " + players.get(currentTurn).getName() + "'s turn.");
 
             // If no one has been able to play, end this round
-            if (lastPlayed == currentTurn) break;
+            if (lastPlayed == currentTurn) {
+                System.out.println("No one can play, clears to " + players.get(currentTurn).getName());
+                break;
+            }
 
             Card playedCard = players.get(currentTurn).doTurn(currentCard);
 
@@ -68,6 +74,9 @@ public class Game {
                 currentTurn = (currentTurn + 1) % players.size();
                 continue;
             }
+
+            // If player has won, end round
+//            if (players.get(currentTurn).hasWon()) return;
 
             // Otherwise, update currentCard
             System.out.println(players.get(currentTurn).getName() + " played the " + playedCard);
