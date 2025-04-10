@@ -67,10 +67,18 @@ public class Game {
                 break;
             }
 
+            // Check for player has already won
+            if (players.get(currentTurn).hasWon()) {
+                currentTurn = (currentTurn + 1) % players.size();
+                continue;
+            }
+
+            // Get player's played card
             Card playedCard = players.get(currentTurn).doTurn(currentCard);
 
-            // If player cannot play, pass
+            // Check for player passing
             if (playedCard == null) {
+                System.out.println(players.get(currentTurn).getName() + " passes their turn.");
                 currentTurn = (currentTurn + 1) % players.size();
                 continue;
             }
@@ -81,9 +89,18 @@ public class Game {
             // Otherwise, update currentCard
             System.out.println(players.get(currentTurn).getName() + " played the " + playedCard);
             if (players.get(currentTurn).hasWon()) System.out.println(players.get(currentTurn).getName() + " has won.");
+
+            // If played card is the same as the last one, skip the next player
+            boolean isSkip = false;
+            if (currentCard != null && currentCard.value() == playedCard.value()){
+                isSkip = true;
+                System.out.println(players.get((currentTurn + 1) % players.size()).getName() + " was skipped!");
+            }
+
+            // Update cards and turn
             currentCard = playedCard;
             lastPlayed = currentTurn;
-            currentTurn = (currentTurn + 1) % players.size();
+            currentTurn = (currentTurn + (isSkip ? 2 : 1)) % players.size();
 
         }
     }
